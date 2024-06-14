@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 // Definir las funciones
 function agregarProducto($productos, $nombre,$modelo, $precio, $cantidad) {
@@ -21,12 +22,12 @@ function buscarProductoPorNombreModelo($productos, $nombre,$modelo) {
 function mostrarProductos($productos) {
     $result = '';
     foreach ($productos as $producto) {
-        $result .= "Nombre: " . $producto['nombre'] . ", Precio: $" . $producto['precio'] . ", Cantidad: " . $producto['cantidad'] . "<br>";
+        $result .= "Nombre: " . $producto['nombre'] . ", Modelo:" . $producto['modelo'] . ", Precio: $" . $producto['precio'] . ", Cantidad: " . $producto['cantidad'] . "<br>";
     }
     return $result;
 }
 
-function actualizarProducto($productos, $nombre,$modelo, $precio, $cantidad) {
+function actualizarProducto($productos, $nombre, $modelo, $precio, $cantidad) {
     foreach ($productos as &$producto) {
         if ($producto['nombre'] == $nombre || $producto['modelo'] == $modelo) {
             $producto['precio'] = $precio;
