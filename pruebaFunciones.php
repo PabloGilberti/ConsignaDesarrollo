@@ -11,7 +11,7 @@ function agregarProducto($productos, $nombre,$modelo, $precio, $cantidad) {
     ];
     return $productos;
 }
-function buscarProductoPorNombre($productos, $nombre,$modelo) {
+function buscarProductoPorNombreModelo($productos, $nombre,$modelo) {
     foreach ($productos as $producto) {
         if ($producto['nombre'] == $nombre || $producto['modelo'] == $modelo) {
             return "Precio: $" . $producto['precio'] . ", Cantidad: " . $producto['cantidad'] . "<br>";
