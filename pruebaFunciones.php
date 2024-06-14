@@ -6,7 +6,7 @@ function agregarProducto($productos, $nombre,$modelo, $precio, $cantidad) {
     $productos[] = [
         'nombre' => $nombre,
         'modelo' => $modelo,
-        'precio' => $precio,
+       'precio' => (float)$precio,
         'cantidad' => $cantidad
     ];
     return $productos;
@@ -49,6 +49,17 @@ function calculoTotal($productos){
     
     
     }
+    function filtrarPorValor($productos, $precio) {
+        $result = '';
+        foreach ($productos as $producto) {
+            $valorPrecio=(float)$producto['precio'];
+            if ($valorPrecio >= (float)$precio){
+            $result .= "Nombre: " . $producto['nombre'] . ", Modelo:" . $producto['modelo'] . ", Precio: $" . $producto['precio'] . ", Cantidad: " . $producto['cantidad'] . "<br>";
+            }    
+        }
+        return $result;
+    }
+    
 
 // Inicializar el array de productos en la sesión
 if (!isset($_SESSION['productos'])) {
@@ -88,7 +99,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         case 'calc_tot':
              $resultado = calculoTotal($productos);
             break;   
-
+   
+        case 'filtrar':
+             $resultado = filtrarPorValor($productos,$precio);
+             break;    
+        
         case 'limpiar':
             $_SESSION['productos'] = [];
             $resultado = "Resultados limpiados correctamente.<br>";
