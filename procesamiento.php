@@ -86,7 +86,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             break;
         
         case 'buscar':
-            $resultado = buscarProductoPorNombre($productos, $nombre);
+            $resultado = buscarProductoPorNombreModelo($productos, $nombre, $modelo);
             break;
         
         case 'mostrar':

@@ -36,7 +36,7 @@ if (isset($_SESSION['resultado'])) {
     <label for="agregar">Agregar</label><br>
     
     <input type="radio" id="buscar" name="accion" value="buscar">
-    <label for="buscar">Buscar</label><br>
+    <label for="buscar">Buscar por Nombre o Modelo</label><br>
     
     <input type="radio" id="mostrar" name="accion" value="mostrar">
     <label for="mostrar">Mostrar</label><br>
