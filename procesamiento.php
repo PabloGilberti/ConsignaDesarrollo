@@ -39,6 +39,17 @@ function actualizarProducto($productos, $nombre, $modelo, $precio, $cantidad) {
     }
     return $productos;
 }
+function calculoTotal($productos){
+$sumatotal=0;
+foreach ($productos as $producto){
+$valorMercaderia = (float)$producto['precio'] * (int)$producto['cantidad'];
+$sumatotal= $sumatotal + $valorMercaderia;
+
+}
+return "El valor total es:". $sumatotal;
+
+
+}
 
 // Inicializar el array de productos en la sesión
 if (!isset($_SESSION['productos'])) {
@@ -54,6 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $modelo = $_POST['modelo'] ?? '';
     $precio = $_POST['precio'] ?? '';
     $cantidad = $_POST['cantidad'] ?? '';
+    $total = $_POST['calc_tot'] ?? '';
 
     switch ($accion) {
         case 'agregar':
@@ -74,11 +86,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $resultado = "Producto actualizado correctamente.<br>";
             break;
 
+        case 'calc_tot':
+            $resultado = calculoTotal($productos);
+            break;    
+
         case 'limpiar':
             $_SESSION['productos'] = [];
             $resultado = "Resultados limpiados correctamente.<br>";
             session_destroy();
             break;
+    
 
         default:
             $resultado = "Acción no válida.";
