@@ -7,7 +7,7 @@ function agregarProducto($productos, $nombre,$modelo, $precio, $cantidad) {
         'nombre' => $nombre,
         'modelo' => $modelo,
         'precio' => (float)$precio,
-        'cantidad' => $cantidad
+        'cantidad' => (int)$cantidad
     ];
     return $productos;
 }
@@ -46,10 +46,11 @@ $valorMercaderia = (float)$producto['precio'] * (int)$producto['cantidad'];
 $sumatotal= $sumatotal + $valorMercaderia;
 
 }
-return "El valor total es:". $sumatotal;
+return  $sumatotal;
 
 
 }
+
 
 function filtrarPorValor($productos, $precio) {
     $result = '';
@@ -61,6 +62,23 @@ function filtrarPorValor($productos, $precio) {
     }
     return $result;
 }
+
+function calculoPromedio($productos){
+    $sumatotalpromedio=calculoTotal($productos);
+   
+    $promedio=0;
+    $unidades=0;
+    foreach ($productos as $producto){
+   
+    $unidades= $unidades + (int)$producto['cantidad'];
+       
+    }
+    $promedio = (float)$sumatotalpromedio/$unidades;
+    
+    return "El valor Promedio es:". $promedio;
+    
+    
+    }
 
 // Inicializar el array de productos en la sesión
 if (!isset($_SESSION['productos'])) {
@@ -77,7 +95,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $precio = $_POST['precio'] ?? '';
     $cantidad = $_POST['cantidad'] ?? '';
     $total = $_POST['calc_tot'] ?? '';
-   // $valor = $_POST['filtrar'] ?? '';
+    $promedio = $_POST['promedio'] ?? '';
 
     switch ($accion) {
         case 'agregar':
@@ -99,12 +117,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             break;
 
         case 'calc_tot':
-            $resultado = calculoTotal($productos);
+            $resultado = "El Calculo total es:" .calculoTotal($productos);
             break;    
         
         case 'filtrar':
             $resultado = filtrarPorValor($productos,$precio);
-            break;    
+            break; 
+            
+        case 'promedio':
+            $resultado = calculoPromedio($productos);
+            break;
+
 
         case 'limpiar':
             $_SESSION['productos'] = [];

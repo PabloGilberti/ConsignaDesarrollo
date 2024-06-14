@@ -45,7 +45,7 @@ function calculoTotal($productos){
     $sumatotal= $sumatotal + $valorMercaderia;
     
     }
-    return "El valor total es:". $sumatotal;
+    return  $sumatotal;
     
     
     }
@@ -59,6 +59,22 @@ function calculoTotal($productos){
         }
         return $result;
     }
+    function calculoPromedio($productos){
+        $sumatotalpromedio=calculoTotal($productos);
+       
+        $promedio=0;
+        $unidades=0;
+        foreach ($productos as $producto){
+       
+        $unidades= $unidades + (int)$producto['cantidad'];
+           
+        }
+        $promedio = (float)$sumatotalpromedio/$unidades;
+        
+        return "El valor Promedio es:". $promedio;
+        
+        
+        }
     
 
 // Inicializar el array de productos en la sesión
@@ -97,12 +113,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             break;
 
         case 'calc_tot':
-             $resultado = calculoTotal($productos);
-            break;   
+                $resultado = "El Calculo total es:" .calculoTotal($productos);
+            break;   ;   
    
         case 'filtrar':
              $resultado = filtrarPorValor($productos,$precio);
-             break;    
+             break;  
+        case 'promedio':
+                $resultado = calculoPromedio($productos);
+             break;  
         
         case 'limpiar':
             $_SESSION['productos'] = [];
