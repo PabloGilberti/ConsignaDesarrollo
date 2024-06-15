@@ -12,7 +12,7 @@ if (isset($_SESSION['resultado'])) {
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="estilos2.css">
+    <link rel="stylesheet" href="estilos.css">
     <title>Gestión de Productos</title>
 </head>
 <body>

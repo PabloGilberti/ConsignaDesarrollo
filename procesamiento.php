@@ -112,7 +112,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             break;
         
         case 'actualizar':
-            $productos = actualizarProducto($productos, $nombre, $precio, $cantidad);
+            $productos = actualizarProducto($productos, $nombre, $modelo, $precio, $cantidad);
             $resultado = "Producto actualizado correctamente.<br>";
             break;
 
